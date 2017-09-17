@@ -68,7 +68,7 @@ class MenuController
 
     #adding the @ might have been a mistake
     @address_book.add_entry(name, phone, email)
-    
+
     system "clear"
     puts "New entry created"
   end
