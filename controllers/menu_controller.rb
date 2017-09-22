@@ -38,11 +38,18 @@ class MenuController
     when 5
       puts "Good-bye!"
       exit(0)
+    when 6
+      system "clear"
+      test_stuff
     else
       system "clear"
       puts "Sorry, that is not a valid input"
       main_menu
     end
+  end
+
+  def test_stuff
+    puts @address_book.retreive("name", "Forrest Stone ")
   end
 
   def view_all_entries

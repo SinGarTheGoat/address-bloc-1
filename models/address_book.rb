@@ -1,6 +1,6 @@
 require_relative 'entry'
 require "csv"
- require 'bloc_record/base'
+require 'bloc_record/base'
 
 class AddressBook < BlocRecord::Base
   attr_reader :entries
@@ -10,6 +10,13 @@ class AddressBook < BlocRecord::Base
     Entry.create(name: name, phone_number: phone_number, email: email, address_book_id: self.id)
 
   end
+
+  def retreive(attribute, value)
+    result =  Entry.find_by(attribute, value)
+
+  end
+
+
 
   def import_from_csv(file_name)
     # Implementation goes here
