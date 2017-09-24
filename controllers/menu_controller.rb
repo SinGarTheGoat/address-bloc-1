@@ -61,17 +61,30 @@ class MenuController
     puts "New AddressBloc Entry"
     print "Name: "
     name = gets.chomp
+
+    while name.class != "string".class
+      system "clear"
+      puts "#{name} is not a valid input"
+      print "please enter a valid string"
+      name = gets.chomp
+    end
+
     print "Phone number: "
     phone = gets.chomp
+    #while phone
+
     print "Email: "
     email = gets.chomp
-
     #adding the @ might have been a mistake
     @address_book.add_entry(name, phone, email)
-
     system "clear"
     puts "New entry created"
   end
+
+
+
+
+
 
   def search_entries
     print "Search by name: "
