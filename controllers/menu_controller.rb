@@ -16,6 +16,7 @@ class MenuController
     puts "5 - Exit"
     print "Enter your selection: "
 
+2
     selection = gets.to_i
 
     case selection
@@ -62,19 +63,32 @@ class MenuController
     print "Name: "
     name = gets.chomp
 
-    while name.class != "string".class
+    #possibly segment this into its own method
+
+    while name.match(/^[a-z ,.'-]+$/i) == nil
       system "clear"
-      puts "#{name} is not a valid input"
-      print "please enter a valid string"
+      puts "#{name} is not a christan name"
+      print "please enter a your christan name"
       name = gets.chomp
     end
 
-    print "Phone number: "
+    print "Phone number in the format, 555-555-5555 "
     phone = gets.chomp
+    while phone.match(/^[0-9]{3}[-]{1}[0-9]{3}[-]{1}[0-9]{4}/) == nil
+      system "clear"
+      puts "#{phone} does not meet the 555-555-5555 format"
+      phone = gets.chomp
+    end
     #while phone
 
     print "Email: "
+
     email = gets.chomp
+    while email.match(/^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/) == nil
+      system "clear"
+      puts "I'm sorry, I highly doubt that is a valid email"
+      email = gets.chomp
+    end
     #adding the @ might have been a mistake
     @address_book.add_entry(name, phone, email)
     system "clear"
