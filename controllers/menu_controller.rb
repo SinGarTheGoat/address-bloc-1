@@ -104,7 +104,7 @@ class MenuController
     print "Search by name: "
     name = gets.chomp
     match = Entry.find_by(:name, name)
-    system "clear"
+    #system "clear"
     if match
       puts match.to_s
       search_submenu(match)
