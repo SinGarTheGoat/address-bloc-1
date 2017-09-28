@@ -16,7 +16,7 @@ class MenuController
     puts "5 - Exit"
     print "Enter your selection: "
 
-2
+
     selection = gets.to_i
 
     case selection
@@ -104,9 +104,9 @@ class MenuController
     print "Search by name: "
     name = gets.chomp
     match = Entry.find_by(:name, name)
-    system "clear"
+    #system "clear"
     if match
-      puts match.to_s
+      puts match.to_s  #Make results pretty
       search_submenu(match)
     else
       puts "No match found for #{name}"
