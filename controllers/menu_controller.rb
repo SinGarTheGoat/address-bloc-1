@@ -7,8 +7,8 @@ class MenuController
     @address_book = AddressBook.first
   end
 
-  def main_menu       #.name
-    puts "#{@address_book} Address Book - #{Entry.count} entries"
+  def main_menu
+    puts "#{@address_book.name} Address Book - #{Entry.count} entries"
     puts "1 - View all entries"
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
@@ -106,7 +106,7 @@ class MenuController
     match = Entry.find_by(:name, name)
     #system "clear"
     if match
-      puts match.to_s
+      puts match.to_s  #Make results pretty
       search_submenu(match)
     else
       puts "No match found for #{name}"
