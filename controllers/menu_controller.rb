@@ -13,7 +13,8 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - Exit"
+    puts "5 - Text"
+    puts "6 - Exit"
     print "Enter your selection: "
 
 
@@ -37,6 +38,10 @@ class MenuController
       read_csv
       main_menu
     when 5
+      system "clear"
+      test_it
+      main_menu
+    when 6
       puts "Good-bye!"
       exit(0)
     else
@@ -46,8 +51,22 @@ class MenuController
     end
   end
 
+  def test_it
+    puts Entry.order(:name, "email", phone_number: :desc)
+    # or
+    puts Entry.order("email DESC", :name, phone_number: :desc)
+    # or
+    puts Entry.order(:name, phone_number: :desc)
+    # or
+    puts Entry.order(name: :asc, phone_number: :desc)
+    # or
+    puts Entry.order("name ASC, phone_number DESC")
+    # or
+    puts Entry.order("name ASC", "phone_number DESC")
+  end
+
   def view_all_entries
-    Entry.all.each do |entry|
+    Entry.order(name: :desc).each do |entry|
       system "clear"
       puts entry.to_s
       entry_submenu(entry)
