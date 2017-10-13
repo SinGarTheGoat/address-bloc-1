@@ -8,19 +8,23 @@ class MenuController
   end
 
   def main_menu
-    puts "#{@address_book.name} Address Book - #{Entry.count} entries"
+    puts "#{@address_book.name} Address Book Selected\n#{@address_book.entries.count} entries"
+    puts "0 - Switch AddressBook"
     puts "1 - View all entries"
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - Text"
-    puts "6 - Exit"
+    puts "5 - Exit"
     print "Enter your selection: "
 
 
     selection = gets.to_i
 
     case selection
+    when 0
+      system "clear"
+      select_address_book_menu
+      main_menu
     when 1
       system "clear"
       view_all_entries
@@ -38,10 +42,6 @@ class MenuController
       read_csv
       main_menu
     when 5
-      system "clear"
-      test_it
-      main_menu
-    when 6
       puts "Good-bye!"
       exit(0)
     else
@@ -50,23 +50,22 @@ class MenuController
       main_menu
     end
   end
+  def select_address_book_menu
+    puts "Select an Address Book:"
+    AddressBook.all.each_with_index do |address_book, index|
+      puts "#{index} - #{address_book.name}"
+    end
 
-  def test_it
-    puts Entry.order(:name, "email", phone_number: :desc)
-    # or
-    puts Entry.order("email DESC", :name, phone_number: :desc)
-    # or
-    puts Entry.order(:name, phone_number: :desc)
-    # or
-    puts Entry.order(name: :asc, phone_number: :desc)
-    # or
-    puts Entry.order("name ASC, phone_number DESC")
-    # or
-    puts Entry.order("name ASC", "phone_number DESC")
+    index = gets.chomp.to_i
+
+    @address_book = AddressBook.find(index + 1)
+    system "clear"
+    return if @address_book
+    puts "Please select a valid index"
+    select_address_book_menu
   end
-
   def view_all_entries
-    Entry.order(name: :desc).each do |entry|
+     @address_book.entries.each do |entry|
       system "clear"
       puts entry.to_s
       entry_submenu(entry)
@@ -122,7 +121,7 @@ class MenuController
   def search_entries
     print "Search by name: "
     name = gets.chomp
-    match = Entry.find_by(:name, name)
+     match = @address_book.find_entry(name)
     #system "clear"
     if match
       puts match.to_s  #Make results pretty
@@ -183,18 +182,21 @@ class MenuController
   end
 
   def edit_entry(entry)
+    updates = {}
     print "Updated name: "
     name = gets.chomp
+    updates[:name] = name unless name.empty?
     print "Updated phone number: "
     phone_number = gets.chomp
+    updates[:phone_number] = phone_number unless phone_number.empty?
     print "Updated email: "
     email = gets.chomp
-    entry.name = name if !name.empty?
-    entry.phone_number = phone_number if !phone_number.empty?
-    entry.email = email if !email.empty?
+    updates[:email] = email unless email.empty?
+
+    entry.update_attributes(updates)
     system "clear"
     puts "Updated entry:"
-    puts entry
+    puts Entry.find(entry.id)
   end
 
   def search_submenu(entry)
