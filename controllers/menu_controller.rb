@@ -8,13 +8,14 @@ class MenuController
   end
 
   def main_menu
-    puts "#{@address_book.name} Address Book Selected\n#{@address_book.entries.count} entries"
+    puts "#{@address_book.name} Address Book Selected\n"#{@address_book.count} entries"
     puts "0 - Switch AddressBook"
     puts "1 - View all entries"
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
     puts "5 - Exit"
+    puts "6- test"
     print "Enter your selection: "
 
 
@@ -44,6 +45,11 @@ class MenuController
     when 5
       puts "Good-bye!"
       exit(0)
+    when 6
+      people = { 1 => { "name" => "David" }, 2 => { "name" => "Jeremy" } }
+      #.update(people.keys, people.values)
+  #  puts  Entry.all.not(:name => "Forrest Stone ")
+    puts Entry.all.take(:name => "Forrest Stone ")
     else
       system "clear"
       puts "Sorry, that is not a valid input"
@@ -81,7 +87,6 @@ class MenuController
     print "Name: "
     name = gets.chomp
 
-    #possibly segment this into its own method
 
     while name.match(/^[a-z ,.'-]+$/i) == nil
       system "clear"
