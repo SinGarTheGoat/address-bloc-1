@@ -184,7 +184,7 @@ class MenuController
 
   def delete_entry(entry)
     #address_book.entries.delete(entry)
-    entry.itself.destroy    ### quite surprised this worked
+    entry.destroy    ### quite surprised this worked
     puts "#{entry.name} has been deleted"
   end
 
