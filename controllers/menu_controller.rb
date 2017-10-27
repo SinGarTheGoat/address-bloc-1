@@ -48,8 +48,9 @@ class MenuController
     when 6
       people = { 1 => { "name" => "David" }, 2 => { "name" => "Jeremy" } }
       #.update(people.keys, people.values)
-  #  puts  Entry.all.not(:name => "Forrest Stone ")
-    puts Entry.all.where(:name => "Forrest Stone ").take
+      #puts  Entry.all.not(:name => "Forrest Stone ")
+      puts Entry.all.class
+      puts Entry.all.where(:name => "Forrest Stone ")
     else
       system "clear"
       puts "Sorry, that is not a valid input"
@@ -71,9 +72,10 @@ class MenuController
     select_address_book_menu
   end
   def view_all_entries
-     @address_book.entries.each do |entry|
+    @address_book.entries.each do |entry|
       system "clear"
-      puts "Address Book: #{entry.address_book.name} Entry"
+      # puts "Address Book: #{entry.address_book.name} Entry"
+      puts "Address Book: #{entry.name}"
       puts entry.to_s
       entry_submenu(entry)
     end
