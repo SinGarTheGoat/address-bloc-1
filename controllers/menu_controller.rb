@@ -48,8 +48,8 @@ class MenuController
     when 6
       people = { 1 => { "name" => "David" }, 2 => { "name" => "Jeremy" } }
       #.update(people.keys, people.values)
-  #  puts  Entry.all.not(:name => "Forrest Stone ")
-    puts Entry.all.where(:name => "Forrest Stone ").take
+      #  puts  Entry.all.not(:name => "Forrest Stone ")
+      puts Entry.all.where(:name => "Forrest Stone ").first.class#.take(5)
     else
       system "clear"
       puts "Sorry, that is not a valid input"
