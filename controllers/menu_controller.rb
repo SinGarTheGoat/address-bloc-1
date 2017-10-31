@@ -44,6 +44,11 @@ class MenuController
     when 5
       puts "Good-bye!"
       exit(0)
+    when 6
+      puts "excelant choice"
+      puts Entry.find_each()
+
+
     else
       system "clear"
       puts "Sorry, that is not a valid input"
@@ -65,7 +70,7 @@ class MenuController
     select_address_book_menu
   end
   def view_all_entries
-     @address_book.entries.each do |entry|
+      Entry.all.each do |entry|
       system "clear"
       puts entry.to_s
       entry_submenu(entry)
@@ -120,7 +125,7 @@ class MenuController
   def search_entries
     print "Search by name: "
     name = gets.chomp
-     match = @address_book.find_entry(name)
+    match = Entry.find_by(:name, name)
     #system "clear"
     if match
       puts match.to_s  #Make results pretty
