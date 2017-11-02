@@ -50,7 +50,7 @@ class MenuController
       #.update(people.keys, people.values)
       #puts  Entry.all.not(:name => "Forrest Stone ")
       puts Entry.all.class
-      puts Entry.destroy_all(name: "Foo Three")
+      puts Entry.where(name: "3").destroy_all
     else
       system "clear"
       puts "Sorry, that is not a valid input"
