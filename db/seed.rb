@@ -4,6 +4,9 @@ require 'bloc_record'
 
 BlocRecord.connect_to('db/address_bloc.sqlite')
 
+
+
+
 book = AddressBook.create(name: 'My Address Book')
 
 puts 'Address Book created'
